@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package crazy_breakout;
+package Logic;
 
 /**
  *
  * @author gustavohg
  */
-public class Crazy_Breakout {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Logic {
     
 }
