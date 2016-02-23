@@ -1,5 +1,5 @@
 
-package manager;
+package Manager;
 
 
 public class CrazyBreakout {
