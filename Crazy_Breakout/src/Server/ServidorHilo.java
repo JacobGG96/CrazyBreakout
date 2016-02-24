@@ -47,7 +47,6 @@ public class ServidorHilo extends Thread {
     @Override
     public void run() {
         String msg;
-        File archivo = new File("texto.txt");
         while (true){
         	try{
 	            msg = dis.readUTF();
