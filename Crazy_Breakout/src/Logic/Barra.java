@@ -14,7 +14,6 @@ public class Barra extends General implements ConstantesCB {
      * en una coordenada predefinida
      */
     public Barra(){
-        
         ImageIcon a = new ImageIcon("barra.png");
         setImagen(a.getImage());
 
