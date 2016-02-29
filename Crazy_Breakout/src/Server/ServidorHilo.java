@@ -39,17 +39,19 @@ public class ServidorHilo extends Thread {
         while (true){
         	try{
 	            msg = dis.readUTF();
-//		    if(msg!=null){
-//		        System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
-//		        dos.writeUTF("Mensaje recibido");
-//		    }
                     if(msg.equals("Actualizacion")){
                         System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
+                        dos.writeUTF("Mensaje recibido");
                         actual();
                     }
                     if(msg.equals("Desconectar")){
                         desconectar();
+                        break;
                     }
+                    if(msg!=null){
+		        System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
+		        dos.writeUTF("Mensaje recibido");
+		    }
 		}
         	catch(Exception e){
  	       	}
