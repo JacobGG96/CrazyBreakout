@@ -1,17 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Server;
 
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 
+/**
+ * Clase Servidor que inicializa un nuevo servidor 
+ * @author gustavohg
+ */
 
 public class Servidor {
-    public static void main(String args[]) throws IOException {
+    
+    /**
+     * Método que abre un socket, acepta una conexión de un nuevo cliente e
+     * inicializa un hilo nuevo para manejar esa conexión mediante
+     * <code>((ServidorHilo) new ServidorHilo(socket, idSession)).start();</code>
+     * dond el método start() llama al método run() de la clase ServidorHilo
+     * @param args 
+     */
+    public static void main(String args[]) {
         ServerSocket ss;
         System.out.print("Inicializando servidor... ");
         try {
