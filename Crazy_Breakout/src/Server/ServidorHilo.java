@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Server;
 
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
+
+/**
+ * Clase que maneja cada hilo inicializado en la clase Servidor, extiende de
+ * clase Thread
+ * @author gustavohg
+ */
 
 public class ServidorHilo extends Thread {
     private Socket socket;
@@ -15,7 +16,15 @@ public class ServidorHilo extends Thread {
     private DataInputStream dis;
     private int idSessio;
     
-    //constructor  que inicializar el socket y asigna  el id al numero de sesion 
+    /**
+     * Método que asigna un socket y un id que dio la clase Servidor a los mismos
+     * atributos pero de la clase ServidorHilo, además abre un puerto para envío
+     * de mensajes y otro para recibimiento de mensajes en el socket
+     * @param socket Asigna un socket a que acepta conexiones a la variable socket
+     * de esta clase
+     * @param id Asigna un id al socket que va a ser el id del cliente que solicita
+     * la conexión
+     */ 
     public ServidorHilo(Socket socket, int id) {
         this.socket = socket;
         this.idSessio = id;
@@ -29,9 +38,8 @@ public class ServidorHilo extends Thread {
     }
     
     /**
-     * el metodo  run  mediante  el override sobresccribe la acci�n
-     * y  hace la asignacion al  archivo y   se lo envia al cliente que hizo esa  solicitud  
-     
+     * Se le hace un Override al método run() de la case Thread, llama a otros
+     * métodos dependiendo de el mensaje que reciba del cliente.
      */
     @Override
     public void run() {
@@ -59,9 +67,9 @@ public class ServidorHilo extends Thread {
     }
     
     /**
-     * metodo que se   encarga de  cerrar todas las  conexiones  que se  realizaron en el socket  
-     * 
-     * 
+     * Cuando el Servidor recibe una solicitud de cerrar la conexión de parte del
+     * cliente este método cierra el socket y ya no pueden haber intercambio de 
+     * datos.
      */
     private void desconectar() {
         try {
@@ -72,6 +80,10 @@ public class ServidorHilo extends Thread {
         }
     }
     
+    /**
+     * Este método envía al cliente una actualización del juego cuando él la solicita.
+     * @throws IOException 
+     */
     private void actual() throws IOException{
         dos.writeUTF("Enviando actualización");
     }
