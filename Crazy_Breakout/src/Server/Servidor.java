@@ -15,7 +15,7 @@ public class Servidor {
      * Método que abre un socket, acepta una conexión de un nuevo cliente e
      * inicializa un hilo nuevo para manejar esa conexión mediante
      * <code>((ServidorHilo) new ServidorHilo(socket, idSession)).start();</code>
-     * dond el método start() llama al método run() de la clase ServidorHilo
+     * dond el método <code>start()</code> llama al método <code>run()</code> de la clase ServidorHilo
      * @param args 
      */
     public static void main(String args[]) {

@@ -20,9 +20,9 @@ public class ServidorHilo extends Thread {
      * Método que asigna un socket y un id que dio la clase Servidor a los mismos
      * atributos pero de la clase ServidorHilo, además abre un puerto para envío
      * de mensajes y otro para recibimiento de mensajes en el socket
-     * @param socket Asigna un socket a que acepta conexiones a la variable socket
+     * @param socket Asigna un socket a que acepta conexiones a la variable <code>socket</code>
      * de esta clase
-     * @param id Asigna un id al socket que va a ser el id del cliente que solicita
+     * @param id Asigna un identificador al socket que va a ser el id del cliente que solicita
      * la conexión
      */ 
     public ServidorHilo(Socket socket, int id) {
@@ -38,7 +38,7 @@ public class ServidorHilo extends Thread {
     }
     
     /**
-     * Se le hace un Override al método run() de la case Thread, llama a otros
+     * Se le hace un Override al método <code>run()</code> de la case Thread, llama a otros
      * métodos dependiendo de el mensaje que reciba del cliente.
      */
     @Override
