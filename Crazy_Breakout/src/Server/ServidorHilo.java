@@ -47,18 +47,18 @@ public class ServidorHilo extends Thread {
         while (true){
         	try{
 	            msg = dis.readUTF();
-                    if(msg.equals("Actualizacion")){
+                    if(msg.equals("Actualizacion")){                      
                         System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
-                        dos.writeUTF("Mensaje recibido");
                         actual();
                     }
                     if(msg.equals("Desconectar")){
+                        System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
                         desconectar();
                         break;
                     }
                     if(msg!=null){
 		        System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
-		        dos.writeUTF("Mensaje recibido");
+                        dos.writeUTF("Mensaje recibido: "+msg);
 		    }
 		}
         	catch(Exception e){
@@ -72,7 +72,8 @@ public class ServidorHilo extends Thread {
      * datos.
      */
     private void desconectar() {
-        try {
+        try {            
+            dos.writeUTF("Desconectado");
             socket.close();
             System.out.println("Cliente #"+this.idSessio+" >>> Se ha desconectado");
         } catch (IOException ex) {
@@ -87,4 +88,6 @@ public class ServidorHilo extends Thread {
     private void actual() throws IOException{
         dos.writeUTF("Enviando actualización");
     }
+    
+    
 }
