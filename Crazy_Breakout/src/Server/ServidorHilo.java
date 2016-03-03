@@ -1,8 +1,12 @@
 package Server;
 
-import java.io.*;
-import java.net.*;
-import java.util.logging.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * Clase que maneja cada hilo inicializado en la clase Servidor, extiende de
