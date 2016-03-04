@@ -11,5 +11,6 @@ public interface ConstantesCB {
     public int POS_INICIAL_BARRAY = 200;
     public int ANCHO_PANTALLA = 200;
     public int LARGO_PANTALLA = 300;
+    public int CANTIDAD_BLOQUES = 20;
     
 }
