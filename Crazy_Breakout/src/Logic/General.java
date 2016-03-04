@@ -45,23 +45,23 @@ public class General {
     }
     
     /**
-     * 
-     * @return 
+     * Crea un objeto Rectangle
+     * @return objeto Rectangle
      */ 
     public Rectangle getRect(){
         return new Rectangle(x, y, imagen.getWidth(null), imagen.getHeight(null));
     }
     
     /**
-     * 
-     * @return 
+     * Devuelve el valor de la variable ancho
+     * @return ancho del objeto
      */
     public int getAncho() {
         return ancho;
     }
     
     /**
-     * 
+     * Configura la variabla ancho
      * @param ancho 
      */
     public void setAncho(int ancho) {
@@ -69,15 +69,15 @@ public class General {
     }
     
     /**
-     * 
-     * @return 
+     * Devuelve el valor de la variable largo
+     * @return largo
      */
     public int getLargo() {
         return largo;
     }
 
     /**
-     * 
+     * Configura la variable largo
      * @param largo 
      */    
     public void setLargo(int largo) {
@@ -85,15 +85,15 @@ public class General {
     }
 
     /**
-     * 
-     * @return 
+     * Devuelve la coordenada x
+     * @return coordenada x
      */
     public int getX() {
         return x;
     }
 
     /**
-     * 
+     * Configura la variable x
      * @param x 
      */
     public void setX(int x) {
@@ -101,21 +101,25 @@ public class General {
     }
 
     /**
-     * 
-     * @return 
+     * Devuelve la variable y
+     * @return y
      */
     public int getY() {
         return y;
     }
 
     /**
-     * 
+     * Configura la variable y
      * @param y 
      */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * Devuelve la variable <code>x_aux</code>
+     * @return variable <code>x_aux</code>
+     */
     public int getX_aux() {
         return x_aux;
     }
@@ -140,10 +144,6 @@ public class General {
      */
     public void setY_aux(int y_aux) {
         this.y_aux = y_aux;
-    }
-    
-    
-    
-    
+    }    
     
 }
