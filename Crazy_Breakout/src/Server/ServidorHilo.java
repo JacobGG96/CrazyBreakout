@@ -42,9 +42,9 @@ public class ServidorHilo extends Thread {
     }
     
     /**
-     * Se le hace un Override al método <code>run()</code> de la case Thread, llama a otros
+     * Se le hace un Override al método <code>run()</code> de la clase Thread, llama a otros
      * métodos dependiendo de el mensaje que reciba del cliente.
-     */
+     */ 
     @Override
     public void run() {
         String msg;
@@ -72,7 +72,7 @@ public class ServidorHilo extends Thread {
     
     /**
      * Cuando el Servidor recibe una solicitud de cerrar la conexión de parte del
-     * cliente este método cierra el socket y ya no pueden haber intercambio de 
+     * cliente este método cierra el socket y ya no pueda haber intercambio de 
      * datos.
      */
     private void desconectar() {
