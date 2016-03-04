@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 public class Bloque extends General{
     
     private boolean destruido;
+    private int resistencia;
+    private boolean sorpresa;
     
     /**
      * Constructor de la clase, asigna a los bloques una imagen
@@ -18,10 +20,12 @@ public class Bloque extends General{
      * @param x coordenada x del bloque
      * @param y coordenada y del bloque
      */
-    public Bloque(int x, int y) {
+    public Bloque(int x, int y, int res) {
         
         this.x = x;
         this.y = y;
+        resistencia = res;
+        
         
         destruido = false;
         
@@ -30,6 +34,12 @@ public class Bloque extends General{
 
         setAncho(getImagen().getWidth(null));
         setLargo(getImagen().getHeight(null));
+    }
+    public Bloque(int x, int y, int res, boolean sorpresa){
+        this.x = x;
+        this.y = y;
+        resistencia = res;
+        
     }
     
     /**
