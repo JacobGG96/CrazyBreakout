@@ -23,7 +23,7 @@ public class Bola extends General implements ConstantesCB {
         setImagen(a.getImage());
 
         setAncho(getImagen().getWidth(null));
-        setLargo(getImagen().getHeight(null));
+        setAlto(getImagen().getHeight(null));
         iniciarPos(POS_INICIAL_BOLAX, POS_INICIAL_BOLAY);
     }    
     
@@ -48,5 +48,7 @@ public class Bola extends General implements ConstantesCB {
             setY_aux(1);
         }   
     }
+    
+    
     
 }
