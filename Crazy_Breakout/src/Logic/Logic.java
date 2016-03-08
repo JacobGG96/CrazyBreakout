@@ -1,6 +1,7 @@
 package Logic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *Clase que controla la lógica del juego
@@ -26,13 +27,17 @@ public class Logic extends ArrayList implements ConstantesCB{
     public void comenzarJuego(){
         bola = new Bola();
         
+        Random aleatorio = new Random();
+        
         int a = 0;
         for(int i = 0; i < 5; i++){
             for(int j = 0 ; j < 6 ; j++){
-                bloque[a] = new Bloque(j, j, j);
+                bloque[a] = new Bloque(j, j, aleatorio.nextInt(3) );
             }
         } 
     }
+    
+       
     
     /**
      * Crea un objeto barra, el cual está asociado con el nuevo jugador
@@ -79,17 +84,69 @@ public class Logic extends ArrayList implements ConstantesCB{
         
         for(int i = 0 ; i < listaj.size() ; i++){
             Barra barra_aux = getBarra(i);
+            int sub_parte = barra_aux.getAncho() / 4;
+            
             if(bola.getRect().intersects(barra_aux.getRect())){
                 int posBarra = (int) barra_aux.getRect().getMinX();
                 int posBola = (int) bola.getRect().getMinX();
                 
-                int int1 = posBarra + 4 ;
-                int int2 = posBarra + 8;
-                int int3 = posBarra + 12;
-                int int4 = posBarra + 16;
+                int int1 = posBarra + sub_parte;
+                int int2 = posBarra + 2 * sub_parte;
+                int int3 = posBarra + 3 * sub_parte;
+                int int4 = posBarra + barra_aux.getAncho();
+                
+                if(posBola < int1){
+                    
+                }
+                
+                if(posBola >= int1 && posBola < int2){
+                    
+                }
+                
+                if(posBola >= int2 && posBola < int3){
+                    
+                }
+                
+                if(posBola >= int3 && posBola < int4){
+                    
+                }
                 
                 
             }
+            
+        }
+        
+        for(int i = 0; i < CANTIDAD_BLOQUES; i++){
+            Bloque act_bloque = bloque[i];
+            
+            if(bola.getRect().intersects(act_bloque.getRect())){
+                
+                if ( !act_bloque.getDestruido()){
+                    
+                    if(bola.getRect().intersects(act_bloque.getRect1())){
+                        
+                    } 
+                    
+                    if(bola.getRect().intersects(act_bloque.getRect2())){
+                        
+                    }
+                    
+                    if(bola.getRect().intersects(act_bloque.getRect3())){
+                        
+                    }
+                    
+                    if(bola.getRect().intersects(act_bloque.getRect4())){
+                        
+                    }
+                    
+                }
+                
+                //por el momento -1, puede haber mas daño 
+                act_bloque.setResistencia(-1);
+                
+            }
+            
+            
         }
         
         

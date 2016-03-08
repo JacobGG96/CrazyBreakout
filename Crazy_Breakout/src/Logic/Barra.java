@@ -18,7 +18,7 @@ public class Barra extends General implements ConstantesCB {
         setImagen(a.getImage());
 
         setAncho(getImagen().getWidth(null));
-        setLargo(getImagen().getHeight(null));
+        setAlto(getImagen().getHeight(null));
         
         iniciarPos(POS_INICIAL_BARRAX, POS_INICIAL_BARRAY);
     }

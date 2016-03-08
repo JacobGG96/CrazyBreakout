@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 
 public class General {
     private int ancho;
-    private int largo;
+    private int alto;
     protected int x;
     protected int y;
     private int x_aux;
@@ -69,19 +69,19 @@ public class General {
     }
     
     /**
-     * Devuelve el valor de la variable largo
-     * @return largo
+     * Devuelve el valor de la variable alto
+     * @return alto
      */
-    public int getLargo() {
-        return largo;
+    public int getAlto() {
+        return alto;
     }
 
     /**
-     * Configura la variable largo
-     * @param largo 
+     * Configura la variable alto
+     * @param alto 
      */    
-    public void setLargo(int largo) {
-        this.largo = largo;
+    public void setAlto(int alto) {
+        this.alto = alto;
     }
 
     /**
