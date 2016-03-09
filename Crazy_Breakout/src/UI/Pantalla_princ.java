@@ -1,0 +1,68 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package UI;
+
+import Logic.ConstantesCB;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+ *
+ * @author gustavohg
+ */
+public class Pantalla_princ implements ConstantesCB {
+
+    public Pantalla_princ() {
+
+        JFrame pantalla_princ = new JFrame();
+        pantalla_princ.setSize(LARGO_PANTALLA,ANCHO_PANTALLA);
+        pantalla_princ.setResizable(false);
+        pantalla_princ.setTitle("Crazy Breakout");
+        pantalla_princ.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pantalla_princ.setVisible(true);
+        
+        JButton Iniciar_juego = new JButton("Iniciar Juego");
+        JButton Salir = new JButton("Salir");
+        
+        Iniciar_juego.setSize(50, 30);
+        Salir.setSize(50, 30);
+        
+        JPanel panel_botonIniciar = new JPanel();
+        JPanel panel_botonSalir = new JPanel();
+        panel_botonIniciar.add(Iniciar_juego);
+        panel_botonSalir.add(Salir);
+        
+        pantalla_princ.getContentPane().add(panel_botonIniciar, BorderLayout.WEST);
+        pantalla_princ.getContentPane().add(panel_botonSalir, BorderLayout.EAST);
+        
+        Iniciar_juego.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                  
+                Nuevo_Jugador Jugador = new Nuevo_Jugador(1);
+                Jugador.run();
+                
+                
+                
+                Salir.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        try {
+                            Jugador.dos.writeUTF("Desconectar");
+                            System.exit(0);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Pantalla_princ.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+            }
+        });
+    }
+}
+    

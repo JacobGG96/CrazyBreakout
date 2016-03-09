@@ -30,7 +30,7 @@ public class Servidor {
             while (true) {
                 Socket socket;
                 socket = ss.accept();
-                System.out.println("Nueva conexi�n entrante: "+socket);
+                System.out.println("Nueva conexion entrante: "+socket);
                 ((ServidorHilo) new ServidorHilo(socket, idSession)).start();
                 idSession++;
             }

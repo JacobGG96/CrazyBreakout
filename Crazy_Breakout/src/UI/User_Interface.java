@@ -11,7 +11,13 @@ package UI;
  */
 public class User_Interface {
     public static void main (String args[]){
-        Pantalla pantalla = new Pantalla();
-        pantalla.setVisible(true);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Pantalla_princ nueva_pantalla = new Pantalla_princ();
+            }
+        });
     }
+
+
 }

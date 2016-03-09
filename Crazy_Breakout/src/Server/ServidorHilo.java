@@ -48,6 +48,7 @@ public class ServidorHilo extends Thread {
     @Override
     public void run() {
         String msg;
+        System.out.println("Cliente #"+this.idSessio+" >>> Se ha conectado");
         while (true){
         	try{
 	            msg = dis.readUTF();
@@ -75,7 +76,7 @@ public class ServidorHilo extends Thread {
      * cliente este método cierra el socket y ya no pueda haber intercambio de 
      * datos.
      */
-    private void desconectar() {
+    public void desconectar() {
         try {            
             dos.writeUTF("Desconectado");
             socket.close();
