@@ -38,8 +38,11 @@ public class Bloque extends General{
         ImageIcon a = new ImageIcon("bloque.png");
         //setImagen(a.getImage()); Eliminar, no se ocupa, solo en interfaz
 
-        setAncho(getImagen().getWidth(null));
-        setAlto(getImagen().getHeight(null));
+        //setAncho(getImagen().getWidth(null));
+        //setAlto(getImagen().getHeight(null));
+        
+        setAncho(4);
+        setAlto(2);
     }
     public Bloque(int x, int y, int res, boolean sorpresa){
         this.x = x;
