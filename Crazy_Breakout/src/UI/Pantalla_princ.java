@@ -45,7 +45,7 @@ public class Pantalla_princ implements ConstantesCB {
             @Override
             public void actionPerformed(ActionEvent e){
                   
-                Nuevo_Jugador Jugador = new Nuevo_Jugador(1);
+                Nuevo_Jugador Jugador = new Nuevo_Jugador();
                 Jugador.run();
                 
                 

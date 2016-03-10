@@ -18,14 +18,14 @@ class Nuevo_Jugador extends Thread{
     protected Socket sk;
     protected DataOutputStream dos;
     protected DataInputStream dis;
-    private final int id;
+    private int id;
     
     /**
      * 
-     * @param id 
+     *  
      */
-    public Nuevo_Jugador(int id) {
-        this.id = id;
+    public Nuevo_Jugador() {
+        
     }
     
     /**
@@ -37,6 +37,9 @@ class Nuevo_Jugador extends Thread{
             sk = new Socket("127.0.0.1", 8080);
             dos = new DataOutputStream(sk.getOutputStream());
             dis = new DataInputStream(sk.getInputStream());
+            dos.writeUTF("Nuevo Jugador");
+            leer();
+            
         } catch (IOException ex) {
             Logger.getLogger(Nuevo_Jugador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,10 +62,33 @@ class Nuevo_Jugador extends Thread{
      * 
      * @throws IOException 
      */
+    public void leer_inicial() throws IOException{
+        String e;
+        while (true){
+            e = dis.readUTF();
+            if (e != null){
+                String[] Inicial = e.split("#");
+                System.out.println("Servidor >>> "+Inicial);
+                break;
+            }
+        }
+        
+    }
+    
+    /**
+     * 
+     * @throws IOException 
+     */
     public void leer() throws IOException{
         String e;
-        e = dis.readUTF();
-        System.out.println("Servidor >>> "+e);
+        while (true){
+            e = dis.readUTF();
+            if (e != null){
+                System.out.println("Servidor >>> "+e);
+                break;
+            }
+        }
+        
     }
     
     

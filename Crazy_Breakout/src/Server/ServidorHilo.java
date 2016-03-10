@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Logic.ConstantesCB;
 
 
 /**
@@ -14,11 +15,13 @@ import java.util.logging.Logger;
  * @author gustavohg
  */
 
-public class ServidorHilo extends Thread {
+public class ServidorHilo extends Thread implements ConstantesCB{
     private Socket socket;
     private DataOutputStream dos;
     private DataInputStream dis;
     private int idSessio;
+    
+    private String[] lista;
     
     /**
      * Método que asigna un socket y un id que dio la clase Servidor a los mismos
@@ -35,6 +38,7 @@ public class ServidorHilo extends Thread {
         try {
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
+            
         } 
         catch (IOException ex) {
             Logger.getLogger(ServidorHilo.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,9 +56,11 @@ public class ServidorHilo extends Thread {
         while (true){
         	try{
 	            msg = dis.readUTF();
-                    if(msg.equals("Actualizacion")){                      
+                    if(msg.equals("Nuevo Jugador")){                      
                         System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
-                        actual();
+                        dos.writeUTF(this.idSessio +"#"+ POS_INICIAL_BOLAX+"#"+POS_INICIAL_BOLAY+"#"+
+                                     POS_INICIAL_BARRAX+"#"+POS_INICIAL_BARRAY+"#"+CANTIDAD_BLOQUES);
+                        //actual();
                     }
                     if(msg.equals("Desconectar")){
                         System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
@@ -62,7 +68,7 @@ public class ServidorHilo extends Thread {
                         break;
                     }
                     if(msg!=null){
-		        System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
+		        //System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
                         dos.writeUTF("Mensaje recibido: "+msg);
 		    }
 		}
