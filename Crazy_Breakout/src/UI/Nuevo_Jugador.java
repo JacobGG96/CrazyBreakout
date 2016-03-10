@@ -38,7 +38,7 @@ class Nuevo_Jugador extends Thread{
             dos = new DataOutputStream(sk.getOutputStream());
             dis = new DataInputStream(sk.getInputStream());
             dos.writeUTF("Nuevo Jugador");
-            leer();
+            leer_inicial();
             
         } catch (IOException ex) {
             Logger.getLogger(Nuevo_Jugador.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,8 +67,11 @@ class Nuevo_Jugador extends Thread{
         while (true){
             e = dis.readUTF();
             if (e != null){
-                String[] Inicial = e.split("#");
-                System.out.println("Servidor >>> "+Inicial);
+                String Inicial = e;
+                String[] InicialArray = Inicial.split("#");
+                for (int i = 0; i < InicialArray.length; i++) {
+                    System.out.println(InicialArray[i]);
+                }
                 break;
             }
         }
