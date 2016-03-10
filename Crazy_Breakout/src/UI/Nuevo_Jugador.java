@@ -69,9 +69,10 @@ class Nuevo_Jugador extends Thread{
             if (e != null){
                 String Inicial = e;
                 String[] InicialArray = Inicial.split("#");
+                /*System.out.println(e);
                 for (int i = 0; i < InicialArray.length; i++) {
                     System.out.println(InicialArray[i]);
-                }
+                }*/
                 break;
             }
         }

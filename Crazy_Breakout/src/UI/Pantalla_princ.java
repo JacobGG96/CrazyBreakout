@@ -28,6 +28,7 @@ public class Pantalla_princ implements ConstantesCB {
         pantalla_princ.setVisible(true);
         
         JButton Iniciar_juego = new JButton("Iniciar Juego");
+        Iniciar_juego.setToolTipText("Haga click si desea iniciar un nuevo juego");
         JButton Salir = new JButton("Salir");
         
         Iniciar_juego.setSize(50, 30);
@@ -41,15 +42,22 @@ public class Pantalla_princ implements ConstantesCB {
         pantalla_princ.getContentPane().add(panel_botonIniciar, BorderLayout.WEST);
         pantalla_princ.getContentPane().add(panel_botonSalir, BorderLayout.EAST);
         
+        Salir.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        System.exit(0);
+                    }
+                });
+        
         Iniciar_juego.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                   
                 Nuevo_Jugador Jugador = new Nuevo_Jugador();
                 Jugador.run();
-                
-                
-                
+                pantalla_princ.getContentPane().remove(panel_botonIniciar);
+                pantalla_princ.getContentPane().repaint();
+                               
                 Salir.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e){
