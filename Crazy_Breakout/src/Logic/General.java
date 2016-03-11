@@ -49,7 +49,7 @@ public class General {
      * @return objeto Rectangle
      */ 
     public Rectangle getRect(){
-        return new Rectangle(x, y, imagen.getWidth(null), imagen.getHeight(null));
+        return new Rectangle(x, y, getAncho(), getAlto());
     }
     
     /**
