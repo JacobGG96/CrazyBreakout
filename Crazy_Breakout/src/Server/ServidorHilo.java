@@ -95,10 +95,10 @@ public class ServidorHilo extends Thread implements ConstantesCB{
     /**
      * Este método envía al cliente una actualización del juego cuando él la solicita.
      * @throws IOException 
-     */
+     
     private void actual() throws IOException{
         dos.writeUTF("Enviando actualización");
-    }
+    }*/
     
     
 }

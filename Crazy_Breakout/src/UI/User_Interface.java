@@ -6,10 +6,15 @@
 package UI;
 
 /**
- *
+ * En esta clase invoca un Runnable que genera una nuva pantalla principal.
  * @author gustavohg
  */
 public class User_Interface {
+    /**
+     * Se hace un override al método <code>run()</code> de la clase Runnable donde se
+     * crea un nuevo objeto Pantalla_princ.
+     * @param args 
+     */
     public static void main (String args[]){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override

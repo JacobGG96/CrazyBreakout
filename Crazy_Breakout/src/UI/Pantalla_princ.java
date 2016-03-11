@@ -13,11 +13,16 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- *
+ * Esta clase se utiliza para generar la pantalla principal del juego.
  * @author gustavohg
  */
 public class Pantalla_princ implements ConstantesCB {
 
+    /**
+     * Acá se instancian un conjunto de objetos para generar la pantalla principal del juego
+     * y darle una funcionalidad a dos botones que se utilizarán para generar un nuevo juego
+     * o para salir de la pantalla principal.
+     */
     public Pantalla_princ() {
 
         JFrame pantalla_princ = new JFrame();

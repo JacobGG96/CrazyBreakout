@@ -11,7 +11,7 @@ import java.util.logging.*;
 import java.util.*;
 
 /**
- *
+ * Esta clase genera un nuevo jugador que se conecta con el servidor para el intercambio de datos.
  * @author gustavohg
  */
 class Nuevo_Jugador extends Thread{
@@ -22,14 +22,15 @@ class Nuevo_Jugador extends Thread{
     
     /**
      * 
-     *  
+     * Constructor de nuevo jugador 
      */
     public Nuevo_Jugador() {
         
     }
     
     /**
-     * 
+     * Hace un override al método <code>run()</code> de la clase Thread e inicializa la conexión
+     * con el servidor y recibe los datos inciales.
      */
     @Override
     public void run() {
@@ -46,7 +47,7 @@ class Nuevo_Jugador extends Thread{
     }
     
     /**
-     * 
+     * Cierra la conexión del jugador con el servidor.
      */
     public void close() {
         try {
@@ -59,7 +60,8 @@ class Nuevo_Jugador extends Thread{
     }
     
     /**
-     * 
+     * Lee un Strinig que el servidor envía con los datos iniciales para poder crear un nuevo juego
+     * y los separa en un arreglo utilizando un split cada vez que hay un # en el string.
      * @throws IOException 
      */
     public void leer_inicial() throws IOException{
@@ -82,7 +84,7 @@ class Nuevo_Jugador extends Thread{
     /**
      * 
      * @throws IOException 
-     */
+     
     public void leer() throws IOException{
         String e;
         while (true){
@@ -93,7 +95,7 @@ class Nuevo_Jugador extends Thread{
             }
         }
         
-    }
+    }*/
     
     
 }
