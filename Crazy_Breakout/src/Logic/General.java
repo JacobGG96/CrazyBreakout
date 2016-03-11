@@ -133,6 +133,10 @@ public class General {
         this.x_aux = x_aux;
     }
 
+    /**
+     * Devuelve la variable Y_aux
+     * @return Y_aux
+     */
     public int getY_aux() {
         return y_aux;
     }
