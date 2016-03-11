@@ -169,6 +169,9 @@ public class Logic extends TimerTask implements ConstantesCB{
         return (Barra) listaj.get(i);
     }
     
+    /**
+     * Metodo que termina el juego
+     */    
     public void terminarJuego(){
         System.out.println("Game Over");
         
