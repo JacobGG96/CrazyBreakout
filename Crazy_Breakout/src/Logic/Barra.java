@@ -40,43 +40,4 @@ public class Barra extends General implements ConstantesCB {
         }  
     }
     
-    /**
-    
-     * Modifica el movimiento de la barra cuando se presiona
-     * la tecla izquierda o derecha del teclado
-     * @param e objeto de la clase <code>KeyEvent</code>
-     * @see KeyEvent
-     
-    public void keyPressed(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-            setX_aux(-1);
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            setX_aux(1);
-        }
-    }*/
-
-    /**
-     * Detiene el movimiento de la barra cuando se deja de plesionar la 
-     * tecla izquierda o derechad del teclado
-     * @param e objeto de la clase <code>KeyEvent</code>
-     * @see KeyEvent
-     */
-    public void keyReleased(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-            setX_aux(0);
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            setX_aux(0);
-        }
-    }
-    
 }
