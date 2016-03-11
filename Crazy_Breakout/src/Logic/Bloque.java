@@ -1,7 +1,9 @@
 package Logic;
 
 import java.awt.Rectangle;
+import java.awt.geom.Line2D;
 import javax.swing.ImageIcon;
+import java.awt.geom.Line2D.Double;
 
 /**
  * Clase para manejo de los bloques
@@ -13,13 +15,7 @@ public class Bloque extends General{
     
     private boolean destruido;
     private int resistencia;
-    private Rectangle rect1;
-    private Rectangle rect2;
-    private Rectangle rect3;
-    private Rectangle rect4;
     private boolean sorpresa;
-    private int sub_ancho;
-    private int sub_alto;
     
     /**
      * Constructor de la clase, asigna a los bloques una imagen
@@ -29,9 +25,7 @@ public class Bloque extends General{
      */
     public Bloque(int x, int y, int res) {
         
-        sub_ancho = getAncho() / 2;
-        sub_alto = getAlto() / 2;
-        
+                
         this.x = x;
         this.y = y;
         resistencia = res;
@@ -39,11 +33,18 @@ public class Bloque extends General{
         destruido = false;
         
         ImageIcon a = new ImageIcon("bloque.png");
-        //setImagen(a.getImage()); Eliminar, no se ocupa, solo en interfaz
-
-        setAncho(getImagen().getWidth(null));
-        setAlto(getImagen().getHeight(null));
+              
+        setAncho(4);
+        setAlto(2);
     }
+    
+    /**
+     * Constructor sobrecargado
+     * @param x coordenada x del bloque
+     * @param y coordenada y del bloque
+     * @param res resistencia del bloque
+     * @param sorpresa tipo de sorpresa que trae el bloque
+     */
     public Bloque(int x, int y, int res, boolean sorpresa){
         this.x = x;
         this.y = y;
@@ -51,16 +52,16 @@ public class Bloque extends General{
         
     }
 
+    /**
+     * Configura la resistencia del bloque
+     * @param daño el daño recibido por la <code>bola</code>
+     */
     public void setResistencia(int daño) {
+        this.resistencia += daño;
         if(this.resistencia == 0){
             setDestruido(true);
         }
-        
-        this.resistencia += daño;
-    }
-    
-    
-    
+    }    
        
     /**
      * Devuelve el estado del bloque
@@ -76,24 +77,6 @@ public class Bloque extends General{
      */
     public void setDestruido(boolean valor) {
         destruido = valor;
-    }
-    
-    public Rectangle getRect1() {
-        return new Rectangle(x, y, sub_ancho , sub_alto);
-    }
-
-    public Rectangle getRect2() {
-        return new Rectangle(x + sub_ancho, y, sub_ancho , sub_alto);
-    }
-
-    public Rectangle getRect3() {
-        return new Rectangle(x, y + sub_alto, sub_ancho , sub_alto);
-    }
-
-    public Rectangle getRect4() {
-        return new Rectangle(x + sub_ancho, y + sub_alto, sub_ancho , sub_alto);
-    }
-    
-    
+    } 
     
 }

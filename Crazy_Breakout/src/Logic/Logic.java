@@ -2,12 +2,13 @@ package Logic;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.TimerTask;
 
 /**
  *Clase que controla la lógica del juego
  * 
  */
-public class Logic extends ArrayList implements ConstantesCB{
+public class Logic extends TimerTask implements ConstantesCB{
     private Bola bola;
     private Bloque bloque[];
     private Barra b;
@@ -18,6 +19,7 @@ public class Logic extends ArrayList implements ConstantesCB{
      */
     public Logic(){
         comenzarJuego();
+        
     }
     
     /**
@@ -32,7 +34,8 @@ public class Logic extends ArrayList implements ConstantesCB{
         int a = 0;
         for(int i = 0; i < 5; i++){
             for(int j = 0 ; j < 6 ; j++){
-                bloque[a] = new Bloque(j, j, aleatorio.nextInt(3) );
+                bloque[a] = new Bloque(i, j, aleatorio.nextInt(3) );
+                a++;
             }
         } 
     }
@@ -40,11 +43,13 @@ public class Logic extends ArrayList implements ConstantesCB{
        
     
     /**
-     * Crea un objeto barra, el cual está asociado con el nuevo jugador
+     * Crea un objeto barra, el cual está asociado con el nuevo jugador y se 
+     * agrega a una estructura de datos
      * @param idJug id del jugador nuevo el cual va a ser el nombre del objeto
      * barra
      */
-    public void nuevoJugador(Barra idJug){
+    public void nuevoJugador(Object idJug){
+       // Barra idJug;
         idJug = new Barra();
         listaj.add(idJug);
     }    
@@ -58,6 +63,16 @@ public class Logic extends ArrayList implements ConstantesCB{
      */
     public static void modifBarra(Barra id, int x_aux){
         id.setX_aux(x_aux);        
+    }
+    
+    @Override
+    public void run(){
+        bola.moverse();
+        for(int i = 0 ; i < listaj.size() ; i++) {
+            getBarra(i).moverse();
+        }
+        verificarColision();
+        
     }
     
     /**
@@ -96,21 +111,23 @@ public class Logic extends ArrayList implements ConstantesCB{
                 int int4 = posBarra + barra_aux.getAncho();
                 
                 if(posBola < int1){
-                    
+                    bola.setX_aux(-1);
+                    bola.setY(-1);                    
                 }
                 
                 if(posBola >= int1 && posBola < int2){
-                    
+                    bola.setY_aux(-1);
                 }
                 
                 if(posBola >= int2 && posBola < int3){
-                    
+                    bola.setX_aux(0);
+                    bola.setY_aux(-1);
                 }
                 
                 if(posBola >= int3 && posBola < int4){
-                    
+                    bola.setX_aux(1);
+                    bola.setY_aux(-1);
                 }
-                
                 
             }
             
@@ -119,38 +136,27 @@ public class Logic extends ArrayList implements ConstantesCB{
         for(int i = 0; i < CANTIDAD_BLOQUES; i++){
             Bloque act_bloque = bloque[i];
             
-            if(bola.getRect().intersects(act_bloque.getRect())){
+            if( bola.getRect().intersects(act_bloque.getRect())){
                 
-                if ( !act_bloque.getDestruido()){
-                    
-                    if(bola.getRect().intersects(act_bloque.getRect1())){
-                        
-                    } 
-                    
-                    if(bola.getRect().intersects(act_bloque.getRect2())){
-                        
+                if(!act_bloque.getDestruido()){
+                    if(act_bloque.getRect().intersectsLine(bola.getLineaIzq())){
+                        bola.setX_aux(1);
+                    }
+                    else if(act_bloque.getRect().intersectsLine(bola.getLineaDer())){
+                        bola.setX_aux(-1);
                     }
                     
-                    if(bola.getRect().intersects(act_bloque.getRect3())){
-                        
+                    if(act_bloque.getRect().intersectsLine(bola.getLineaSup())){
+                        bola.setY_aux(1);
                     }
-                    
-                    if(bola.getRect().intersects(act_bloque.getRect4())){
-                        
+                    else if(act_bloque.getRect().intersectsLine(bola.getLineaInf())){
+                        bola.setY_aux(-1);
                     }
                     
                 }
-                
-                //por el momento -1, puede haber mas daño 
                 act_bloque.setResistencia(-1);
-                
             }
-            
-            
         }
-        
-        
-    
     }
     
     /**
@@ -163,6 +169,9 @@ public class Logic extends ArrayList implements ConstantesCB{
         return (Barra) listaj.get(i);
     }
     
+    /**
+     * Metodo que termina el juego
+     */    
     public void terminarJuego(){
         System.out.println("Game Over");
         

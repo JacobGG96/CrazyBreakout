@@ -49,7 +49,7 @@ public class General {
      * @return objeto Rectangle
      */ 
     public Rectangle getRect(){
-        return new Rectangle(x, y, imagen.getWidth(null), imagen.getHeight(null));
+        return new Rectangle(x, y, getAncho(), getAlto());
     }
     
     /**
@@ -133,6 +133,10 @@ public class General {
         this.x_aux = x_aux;
     }
 
+    /**
+     * Devuelve la variable Y_aux
+     * @return Y_aux
+     */
     public int getY_aux() {
         return y_aux;
     }
