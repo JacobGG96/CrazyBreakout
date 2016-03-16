@@ -8,17 +8,23 @@ import javax.swing.ImageIcon;
  *
  */
 public class Barra extends General implements ConstantesCB {
+    int id_jug;
 
     /**
      * Asigna una imagen al objeto e inicializa la posición de la barra
      * en una coordenada predefinida
      */
-    public Barra(){
+    public Barra(int id_jug){
+        this.id_jug = id_jug;
+        
         ImageIcon a = new ImageIcon("barra.png");
         setImagen(a.getImage());
 
-        setAncho(getImagen().getWidth(null));
-        setAlto(getImagen().getHeight(null));
+        setAncho(10);
+        setAlto(2);
+
+        //setAncho(getImagen().getWidth(null));
+        //setAlto(getImagen().getHeight(null));
         
         iniciarPos(POS_INICIAL_BARRAX, POS_INICIAL_BARRAY);
     }
@@ -35,9 +41,19 @@ public class Barra extends General implements ConstantesCB {
             x = 0;
         }
 
-        if (x >= LARGO_PANTALLA - getAncho()) {
-            x = LARGO_PANTALLA - getAncho();
+        if (x >= ANCHO_PANTALLA - getAncho()) {
+            x = ANCHO_PANTALLA - getAncho();
         }  
     }
+
+    public int getId_jug() {
+        return id_jug;
+    }
+
+    public void setId_jug(int id_jug) {
+        this.id_jug = id_jug;
+    }
+    
+    
     
 }
