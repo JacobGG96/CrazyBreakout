@@ -34,8 +34,8 @@ public class Bloque extends General{
         
         ImageIcon a = new ImageIcon("bloque.png");
               
-        setAncho(4);
-        setAlto(2);
+        setAncho(10);
+        setAlto(4);
     }
     
     /**
@@ -45,7 +45,7 @@ public class Bloque extends General{
      * @param res resistencia del bloque
      * @param sorpresa tipo de sorpresa que trae el bloque
      */
-    public Bloque(int x, int y, int res, boolean sorpresa){
+    public Bloque(int x, int y, int res, String sorpresa){
         this.x = x;
         this.y = y;
         resistencia = res;
@@ -57,7 +57,7 @@ public class Bloque extends General{
      * @param daño el daño recibido por la <code>bola</code>
      */
     public void setResistencia(int daño) {
-        this.resistencia += daño;
+        this.resistencia -= daño;
         if(this.resistencia == 0){
             setDestruido(true);
         }

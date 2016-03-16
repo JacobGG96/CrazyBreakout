@@ -3,16 +3,22 @@ package Logic;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.TimerTask;
+import Logic.Bloque;
+import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *Clase que controla la lógica del juego
  * 
  */
-public class Logic extends TimerTask implements ConstantesCB{
+public class Logic extends Thread implements ConstantesCB{
     private Bola bola;
     private Bloque bloque[];
     private Barra b;
     private ArrayList listaj;
+    private boolean en_juego;
+    private Timer tiempo;
     
     /**
      * Constructor de la clase Logic, llama al método comenzarJuego()
@@ -28,13 +34,18 @@ public class Logic extends TimerTask implements ConstantesCB{
      */
     public void comenzarJuego(){
         bola = new Bola();
+        bloque = new Bloque[30];
+        en_juego = true;
+        listaj = new ArrayList();
+        
+        Timer tiempo = new Timer();
         
         Random aleatorio = new Random();
         
         int a = 0;
         for(int i = 0; i < 5; i++){
             for(int j = 0 ; j < 6 ; j++){
-                bloque[a] = new Bloque(i, j, aleatorio.nextInt(3) );
+                bloque[a] = new Bloque(170 + 10 * j, 20 + i * 4, 1); //aleatorio.nextInt(3) );
                 a++;
             }
         } 
@@ -48,10 +59,11 @@ public class Logic extends TimerTask implements ConstantesCB{
      * @param idJug id del jugador nuevo el cual va a ser el nombre del objeto
      * barra
      */
-    public void nuevoJugador(Object idJug){
-       // Barra idJug;
-        idJug = new Barra();
-        listaj.add(idJug);
+    public void nuevoJugador(){
+        int num_jug = 1;
+        Barra a = new Barra(num_jug);
+        listaj.add(a);
+        num_jug ++;
     }    
     
     /**
@@ -67,12 +79,23 @@ public class Logic extends TimerTask implements ConstantesCB{
     
     @Override
     public void run(){
-        bola.moverse();
-        for(int i = 0 ; i < listaj.size() ; i++) {
-            getBarra(i).moverse();
+        while(en_juego == true){
+            bola.moverse();
+            verificarColision();
+            System.out.println("x : " + bola.getX());
+            System.out.println("y : " + bola.getY());
+         
+            try {
+                /** for(int i = 0 ; i < listaj.size() ; i++) {
+                 * getBarra(i).moverse();
+                 * }*/
+                
+                sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
-        verificarColision();
-        
     }
     
     /**
@@ -82,7 +105,7 @@ public class Logic extends TimerTask implements ConstantesCB{
      */
     public void verificarColision(){
            
-        if(bola.getRect().getMaxX() > ANCHO_PANTALLA){
+        if(bola.getRect().getMaxY() >  ALTO_PANTALLA){
             terminarJuego();
         }        
         
@@ -102,6 +125,7 @@ public class Logic extends TimerTask implements ConstantesCB{
             int sub_parte = barra_aux.getAncho() / 4;
             
             if(bola.getRect().intersects(barra_aux.getRect())){
+                System.out.println("Colision barra");
                 int posBarra = (int) barra_aux.getRect().getMinX();
                 int posBola = (int) bola.getRect().getMinX();
                 
@@ -137,6 +161,7 @@ public class Logic extends TimerTask implements ConstantesCB{
             Bloque act_bloque = bloque[i];
             
             if( bola.getRect().intersects(act_bloque.getRect())){
+                System.out.println("Colision bloque");
                 
                 if(!act_bloque.getDestruido()){
                     if(act_bloque.getRect().intersectsLine(bola.getLineaIzq())){
@@ -154,10 +179,13 @@ public class Logic extends TimerTask implements ConstantesCB{
                     }
                     
                 }
-                act_bloque.setResistencia(-1);
+                
+                act_bloque.setResistencia(1);
+                
             }
         }
     }
+    
     
     /**
      * Hace un casting del elemento Object que devuelve 
@@ -173,6 +201,7 @@ public class Logic extends TimerTask implements ConstantesCB{
      * Metodo que termina el juego
      */    
     public void terminarJuego(){
+        en_juego = false;
         System.out.println("Game Over");
         
     }
