@@ -23,14 +23,19 @@ public class Bola extends General implements ConstantesCB {
         setX_aux(1);
         setY_aux(-1);
         
+        setAncho(4);
+        setAlto(4);
+        
+        //setAncho(getImagen().getWidth(null));
+        //setAlto(getImagen().getHeight(null));
+        
         max_x = x + getAncho();
         max_y = y + getAlto();
 
         ImageIcon a = new ImageIcon("bola.png");
         setImagen(a.getImage());
 
-        setAncho(getImagen().getWidth(null));
-        setAlto(getImagen().getHeight(null));
+        
         iniciarPos(POS_INICIAL_BOLAX, POS_INICIAL_BOLAY);
     }    
     
