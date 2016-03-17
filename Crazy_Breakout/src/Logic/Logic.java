@@ -14,6 +14,8 @@ import java.util.logging.Logger;
  */
 public class Logic extends Thread implements ConstantesCB{
     private Bola bola;
+
+    
     private Bloque bloque[];
     private Barra b;
     private ArrayList listaj;
@@ -80,17 +82,23 @@ public class Logic extends Thread implements ConstantesCB{
     @Override
     public void run(){
         while(en_juego == true){
-            bola.moverse();
-            verificarColision();
-            System.out.println("x : " + bola.getX());
-            System.out.println("y : " + bola.getY());
-         
             try {
-                /** for(int i = 0 ; i < listaj.size() ; i++) {
-                 * getBarra(i).moverse();
-                 * }*/
+                bola.moverse();
+                verificarColision();
+                System.out.println("x : " + bola.getX());
+                System.out.println("y : " + bola.getY());
+                Thread.sleep(50);
                 
-                sleep(1);
+                try {
+                    /** for(int i = 0 ; i < listaj.size() ; i++) {
+                     * getBarra(i).moverse();
+                     * }*/
+                    
+                    sleep(1);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -204,6 +212,10 @@ public class Logic extends Thread implements ConstantesCB{
         en_juego = false;
         System.out.println("Game Over");
         
+    }
+    
+    public Bola getBola() {
+        return bola;
     }
         
 }

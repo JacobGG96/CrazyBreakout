@@ -26,7 +26,7 @@ public class Pantalla_princ implements ConstantesCB {
     public Pantalla_princ() {
 
         JFrame pantalla_princ = new JFrame();
-        pantalla_princ.setSize(LARGO_PANTALLA,ANCHO_PANTALLA);
+        pantalla_princ.setSize(ALTO_PANTALLA,ANCHO_PANTALLA);
         pantalla_princ.setResizable(false);
         pantalla_princ.setTitle("Crazy Breakout");
         pantalla_princ.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +59,7 @@ public class Pantalla_princ implements ConstantesCB {
             public void actionPerformed(ActionEvent e){
                   
                 Nuevo_Jugador Jugador = new Nuevo_Jugador();
-                Jugador.run();
+                Jugador.start();
                 pantalla_princ.getContentPane().remove(panel_botonIniciar);
                 pantalla_princ.getContentPane().repaint();
                                

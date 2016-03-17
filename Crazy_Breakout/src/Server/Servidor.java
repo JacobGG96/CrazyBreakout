@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Logic.*;
 
 /**
  * Clase Servidor que inicializa un nuevo servidor 
@@ -27,12 +28,26 @@ public class Servidor {
             ss = new ServerSocket(8080);
             System.out.println("\t[OK]");
             int idSession = 0;
+            Logic Nuevo_juego = new Logic();
             while (true) {
-                Socket socket;
-                socket = ss.accept();
-                System.out.println("Nueva conexion entrante: "+socket);
-                ((ServidorHilo) new ServidorHilo(socket, idSession)).start();
-                idSession++;
+                System.out.println(idSession);
+                if (idSession == 0){
+                    Socket socket;
+                    socket = ss.accept();
+                    System.out.println("Nueva conexion entrante: "+socket);
+                    ((ServidorHilo) new ServidorHilo(socket, idSession,Nuevo_juego.getBola())).start();
+                    Nuevo_juego.nuevoJugador();
+                    Nuevo_juego.start();
+                    idSession++;
+                }
+                if (idSession>0){
+                    Socket socket;
+                    socket = ss.accept();
+                    System.out.println("Nueva conexion entrante: "+socket);
+                    ((ServidorHilo) new ServidorHilo(socket, idSession,Nuevo_juego.getBola())).start();
+                    Nuevo_juego.nuevoJugador();
+                    idSession++;
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);

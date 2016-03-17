@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Logic.ConstantesCB;
+import Logic.*;
 
 
 /**
@@ -20,7 +20,8 @@ public class ServidorHilo extends Thread implements ConstantesCB{
     private DataOutputStream dos;
     private DataInputStream dis;
     private int idSessio;
-    
+    private Bola bola;
+    private int state;
     private String[] lista;
     
     /**
@@ -31,10 +32,13 @@ public class ServidorHilo extends Thread implements ConstantesCB{
      * de esta clase
      * @param id Asigna un identificador al socket que va a ser el id del cliente que solicita
      * la conexión
+     * @param nueva_bola
      */ 
-    public ServidorHilo(Socket socket, int id) {
+    public ServidorHilo(Socket socket, int id, Bola nueva_bola) {
+        this.bola = nueva_bola;
         this.socket = socket;
         this.idSessio = id;
+        this.state = 0;
         try {
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
@@ -58,9 +62,19 @@ public class ServidorHilo extends Thread implements ConstantesCB{
 	            msg = dis.readUTF();
                     if(msg.equals("Nuevo Jugador")){                      
                         System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
-                        dos.writeUTF(this.idSessio +"#"+ POS_INICIAL_BOLAX+"#"+POS_INICIAL_BOLAY+"#"+
+                        if (this.idSessio==0){
+                            dos.writeUTF(this.idSessio +"#"+ POS_INICIAL_BOLAX+"#"+POS_INICIAL_BOLAY+"#"+
                                      POS_INICIAL_BARRAX+"#"+POS_INICIAL_BARRAY+"#"+CANTIDAD_BLOQUES);
-                        //actual();
+                        }
+                        while(true){
+                            if (state == 0){
+                                actual();
+                                Thread.sleep(50);
+                            }
+                            else{
+                                break;
+                            }
+                        }
                     }
                     if(msg.equals("Desconectar")){
                         System.out.println("Cliente #"+this.idSessio+" >>> "+msg);
@@ -83,8 +97,8 @@ public class ServidorHilo extends Thread implements ConstantesCB{
      * datos.
      */
     public void desconectar() {
-        try {            
-            dos.writeUTF("Desconectado");
+        try { 
+            this.state=1;
             socket.close();
             System.out.println("Cliente #"+this.idSessio+" >>> Se ha desconectado");
         } catch (IOException ex) {
@@ -95,10 +109,11 @@ public class ServidorHilo extends Thread implements ConstantesCB{
     /**
      * Este método envía al cliente una actualización del juego cuando él la solicita.
      * @throws IOException 
+     */
      
     private void actual() throws IOException{
-        dos.writeUTF("Enviando actualización");
-    }*/
+        dos.writeUTF(this.bola.getX()+"#"+this.bola.getY());
+    }
     
     
 }
