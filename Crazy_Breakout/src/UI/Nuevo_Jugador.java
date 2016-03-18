@@ -8,7 +8,6 @@ package UI;
 import java.io.*;
 import java.net.Socket;
 import java.util.logging.*;
-import java.util.*;
 
 /**
  * Esta clase genera un nuevo jugador que se conecta con el servidor para el intercambio de datos.
@@ -21,6 +20,16 @@ class Nuevo_Jugador extends Thread{
     private int id;
     private int pos_bola_x;
     private int pos_bola_y;
+    private int pos_barra_x;
+    private int pos_barra_y;
+
+    public int getPos_barra_x() {
+        return pos_barra_x;
+    }
+
+    public int getPos_barra_y() {
+        return pos_barra_y;
+    }
 
 
     public int getPos_bola_x() {
@@ -84,7 +93,12 @@ class Nuevo_Jugador extends Thread{
                 String Inicial = e;
                 String[] InicialArray = Inicial.split("#");
                 System.out.println(Inicial);
-                System.out.println(InicialArray[4]);
+                if (Integer.parseInt(InicialArray[0])==0){
+                    this.pos_bola_x = Integer.parseInt(InicialArray[1]);
+                    this.pos_bola_y = Integer.parseInt(InicialArray[2]);
+                    this.pos_barra_x = Integer.parseInt(InicialArray[3]);
+                    this.pos_barra_y = Integer.parseInt(InicialArray[4]);
+                }
                 /*for (int i = 0; i < InicialArray.length; i++) {
                     System.out.println(InicialArray[i]);
                 }*/
@@ -109,6 +123,8 @@ class Nuevo_Jugador extends Thread{
                 System.out.println(Datos);
                 this.pos_bola_x = Integer.parseInt(DatosArray[0]);
                 this.pos_bola_y = Integer.parseInt(DatosArray[1]);
+                System.out.println(this.pos_bola_x);
+                System.out.println(this.pos_bola_y);
                 /*for (int i = 0; i < DatosArray.length; i++) {
                     System.out.println(DatosArray[i]);
                 }*/    
