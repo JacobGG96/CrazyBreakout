@@ -65,33 +65,34 @@ public class Bola extends General implements ConstantesCB {
      * Devuelve un objeto Double, el cual es una linea que sigue a la bola
      * @return linea izquierda que sigue a la bola
      */
-    public Line2D getLineaIzq (){
-        return new Double(x - 1, y , x - 1, max_y);
-    }
+   /* public Line2D getLineaIzq (){
+        //return new Double(x - 1, y + 1 , x - 1, max_y - 1);
+        return new Double(x, y + 2 , x , max_y - 2);
+    }*/
     
     /**
      * Devuelve un objeto Double, el cual es una linea que sigue a la bola
      * @return linea superior que sigue a la bola 
      */
-    public Line2D getLineaSup (){
-        return new Double(x, y - 1, max_x, y - 1);
+   /* public Line2D getLineaSup (){
+        return new Double(x + 1, y - 1, max_x - 1, y - 1);
     }
-    
+    */
     /**
      * Devuelve un objeto Double, el cual es una linea que sigue a la bola
      * @return linea inferior que sigue a la bola
      */
-    public Line2D getLineaInf (){
+   /* public Line2D getLineaInf (){
         return new Double(x, max_y + 1, max_x, max_y + 1);
-    }
+    }*/
     
     /**
      * Devuelve un objeto Double, el cual es una linea que sigue a la bola
      * @return linea derecha que sigue a la bola
      */
-    public Line2D getLineaDer (){
+   /* public Line2D getLineaDer (){
         return new Double(max_x + 1, y, max_x + 1, max_y);
     }
-    
+    */
     
 }
