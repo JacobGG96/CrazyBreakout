@@ -5,8 +5,8 @@ package Logic;
  * 
  */
 public interface ConstantesCB {
-    public int POS_INICIAL_BOLAX = 170;
-    public int POS_INICIAL_BOLAY = 50;
+    public int POS_INICIAL_BOLAX = 150;
+    public int POS_INICIAL_BOLAY = 20;
     public int POS_INICIAL_BARRAX = 350;
     public int POS_INICIAL_BARRAY = 290;
     public int ANCHO_PANTALLA = 400;
