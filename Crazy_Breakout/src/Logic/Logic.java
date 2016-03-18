@@ -3,6 +3,7 @@ package Logic;
 import java.util.ArrayList;
 import java.util.Random;
 import Logic.Bloque;
+import java.awt.Point;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -99,11 +100,12 @@ public class Logic extends Thread implements ConstantesCB{
                 verificarColision();
                 System.out.println("x : " + bola.getX());
                 System.out.println("y : " + bola.getY());
-                Thread.sleep(50);
                 
                 for(int i = 0 ; i < listaj.size() ; i++) {
                     getBarra(i).moverse();
                 }
+                
+                Thread.sleep(1);
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,6 +122,7 @@ public class Logic extends Thread implements ConstantesCB{
            
         if(bola.getRect().getMaxY() >  ALTO_PANTALLA){
             turnos -= 1 ;   
+            comenzarJuego();
             //terminarJuego();
             if(turnos <= 0){
                 terminarJuego();
@@ -177,28 +180,64 @@ public class Logic extends Thread implements ConstantesCB{
         for(int i = 0; i < CANTIDAD_BLOQUES; i++){
             Bloque act_bloque = bloque[i];
             
-            if( bola.getRect().intersects(act_bloque.getRect())){
-                System.out.println("Colision bloque");
-                
-                if(!act_bloque.getDestruido()){
-                    if(act_bloque.getRect().intersectsLine(bola.getLineaIzq())){
+            if( bola.getRect().intersects(act_bloque.getRect())){   
+                int ballLeft = (int) bola.getRect().getMinX();
+                int ballHeight = (int) bola.getRect().getHeight();
+                int ballWidth = (int) bola.getRect().getWidth();
+                int ballTop = (int) bola.getRect().getMinY();
+
+                Point pointRight = new Point(ballLeft + ballWidth + 1, ballTop);
+                Point pointLeft = new Point(ballLeft - 1, ballTop);
+                Point pointTop = new Point(ballLeft, ballTop - 1);
+                Point pointBottom = new Point(ballLeft, ballTop + ballHeight + 1);
+
+                if (!act_bloque.getDestruido()) {
+                    System.out.println("Colision bloque");
+                    if (act_bloque.getRect().contains(pointRight)) {
+                        System.out.println("Choque punto derecho");
+                        bola.setX_aux(-1);
+                    } else if (act_bloque.getRect().contains(pointLeft)) {
+                        System.out.println("Choque pto izq");
                         bola.setX_aux(1);
                     }
-                    else if(act_bloque.getRect().intersectsLine(bola.getLineaDer())){
-                        bola.setX_aux(-1);
+
+                    if (act_bloque.getRect().contains(pointTop)) {
+                        System.out.println("Choque punto sup");
+                        bola.setY_aux(1);
+                        
+                    } else if (act_bloque.getRect().contains(pointBottom)) {
+                        System.out.println("Choq punto inferior");
+                        bola.setY_aux(-1);
                     }
+
                     
-                    if(act_bloque.getRect().intersectsLine(bola.getLineaSup())){
+                    
+                    
+                    
+                    /*if(act_bloque.getRect().intersectsLine(bola.getLineaSup())){
+                        System.out.println("Choque linea sup");
                         bola.setY_aux(1);
                     }
-                    else if(act_bloque.getRect().intersectsLine(bola.getLineaInf())){
+                    
+                    else if(act_bloque.getRect().intersectsLine(bola.getLineaIzq())){
+                        System.out.println("Choque linea izq");
+                        bola.setX_aux(1);
+                    }
+                    
+                    if(act_bloque.getRect().intersectsLine(bola.getLineaInf())){
+                        System.out.println("Choque linea inf");
                         bola.setY_aux(-1);
                     }
                     
-                }
+                    else if(act_bloque.getRect().intersectsLine(bola.getLineaDer())){
+                        System.out.println("Choque linea der");
+                        bola.setX_aux(-1);
+                    }  */
+                
                 
                 act_bloque.setResistencia(1);
                 
+                }
             }
         }
     }
