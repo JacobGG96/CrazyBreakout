@@ -26,7 +26,7 @@ public class Pantalla_princ implements ConstantesCB {
     public Pantalla_princ() {
 
         JFrame pantalla_princ = new JFrame();
-        pantalla_princ.setSize(ALTO_PANTALLA,ANCHO_PANTALLA);
+        pantalla_princ.setSize(ANCHO_PANTALLA, ALTO_PANTALLA);
         pantalla_princ.setResizable(false);
         pantalla_princ.setTitle("Crazy Breakout");
         pantalla_princ.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,12 +58,22 @@ public class Pantalla_princ implements ConstantesCB {
             @Override
             public void actionPerformed(ActionEvent e){
                   
-                Nuevo_Jugador Jugador = new Nuevo_Jugador();
-                Jugador.start();
                 pantalla_princ.getContentPane().remove(panel_botonIniciar);
                 pantalla_princ.getContentPane().repaint();
+                pantalla_princ.setVisible(false);
+                
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Pantalla_juego pantallaJuego = new Pantalla_juego();
+                } catch (IOException ex) {
+                    Logger.getLogger(Pantalla_princ.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
                                
-                Salir.addActionListener(new ActionListener(){
+                /*Salir.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e){
                         try {
@@ -73,7 +83,7 @@ public class Pantalla_princ implements ConstantesCB {
                             Logger.getLogger(Pantalla_princ.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                });
+                });*/
             }
         });
     }

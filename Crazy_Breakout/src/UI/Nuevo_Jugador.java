@@ -19,7 +19,18 @@ class Nuevo_Jugador extends Thread{
     protected DataOutputStream dos;
     protected DataInputStream dis;
     private int id;
-    
+    private int pos_bola_x;
+    private int pos_bola_y;
+
+
+    public int getPos_bola_x() {
+        return pos_bola_x;
+    }
+
+    public int getPos_bola_y() {
+        return pos_bola_y;
+    }
+
     /**
      * 
      * Constructor de nuevo jugador 
@@ -71,8 +82,9 @@ class Nuevo_Jugador extends Thread{
             e = dis.readUTF();
             if (e != null){
                 String Inicial = e;
-                //String[] InicialArray = Inicial.split("#");
+                String[] InicialArray = Inicial.split("#");
                 System.out.println(Inicial);
+                System.out.println(InicialArray[4]);
                 /*for (int i = 0; i < InicialArray.length; i++) {
                     System.out.println(InicialArray[i]);
                 }*/
@@ -92,7 +104,14 @@ class Nuevo_Jugador extends Thread{
         while (true){
             e = dis.readUTF();
             if (e != null){
-                System.out.println(e);
+                String Datos = e;
+                String[] DatosArray = Datos.split("#");
+                System.out.println(Datos);
+                this.pos_bola_x = Integer.parseInt(DatosArray[0]);
+                this.pos_bola_y = Integer.parseInt(DatosArray[1]);
+                /*for (int i = 0; i < DatosArray.length; i++) {
+                    System.out.println(DatosArray[i]);
+                }*/    
             }
         }
         

@@ -49,6 +49,10 @@ public class Logic extends Thread implements ConstantesCB{
             }
         } 
     }
+
+    public Bola getBola() {
+        return bola;
+    }
     
        
     
