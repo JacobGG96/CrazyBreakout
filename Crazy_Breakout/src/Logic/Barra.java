@@ -1,6 +1,5 @@
 package Logic;
 
-import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 /**
@@ -9,14 +8,14 @@ import javax.swing.ImageIcon;
  */
 public class Barra extends General implements ConstantesCB {
     int id_jug;
-
+    
     /**
      * Asigna una imagen al objeto e inicializa la posición de la barra
      * en una coordenada predefinida
      */
     public Barra(int id_jug){
         this.id_jug = id_jug;
-        
+                
         ImageIcon a = new ImageIcon("barra.png");
         setImagen(a.getImage());
 
@@ -52,8 +51,7 @@ public class Barra extends General implements ConstantesCB {
 
     public void setId_jug(int id_jug) {
         this.id_jug = id_jug;
-    }
-    
+    } 
     
     
 }
