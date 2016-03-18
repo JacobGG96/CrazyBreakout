@@ -2,7 +2,6 @@ package Logic;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.TimerTask;
 import Logic.Bloque;
 import java.util.Timer;
 import java.util.logging.Level;
@@ -14,20 +13,17 @@ import java.util.logging.Logger;
  */
 public class Logic extends Thread implements ConstantesCB{
     private Bola bola;
-
-    
     private Bloque bloque[];
-    private Barra b;
     private ArrayList listaj;
     private boolean en_juego;
     private Timer tiempo;
+    private int turnos;
     
     /**
      * Constructor de la clase Logic, llama al método comenzarJuego()
      */
     public Logic(){
-        comenzarJuego();
-        
+        comenzarJuego();     
     }
     
     /**
@@ -39,6 +35,7 @@ public class Logic extends Thread implements ConstantesCB{
         bloque = new Bloque[30];
         en_juego = true;
         listaj = new ArrayList();
+        turnos = 3;
         
         Timer tiempo = new Timer();
         
@@ -47,7 +44,7 @@ public class Logic extends Thread implements ConstantesCB{
         int a = 0;
         for(int i = 0; i < 5; i++){
             for(int j = 0 ; j < 6 ; j++){
-                bloque[a] = new Bloque(170 + 10 * j, 20 + i * 4, 1); //aleatorio.nextInt(3) );
+                bloque[a] = new Bloque(170 + 10 * j, 20 + i * 4, aleatorio.nextInt(3) );
                 a++;
             }
         } 
@@ -75,8 +72,23 @@ public class Logic extends Thread implements ConstantesCB{
      * @param x_aux mediante esta variable se puede ver a donde se mueve
      * la barra, mediante los valores 1 ó -1
      */
-    public static void modifBarra(Barra id, int x_aux){
+    public void modifBarra(Barra id, int x_aux){
         id.setX_aux(x_aux);        
+    }
+    
+    /**
+     * Este método debe ser llamado por el servidor cuando se vaya a 
+     * eliminar un jugador, esto puede ser porque se retira un jugador
+     * del juego
+     * @param id identificación del jugador que se desea eliminar 
+     */
+    public void eliminarJugador(int id){
+        for(int i = 0 ; i < listaj.size() ; i++){
+            if(getBarra(i).id_jug == id){
+                listaj.remove(i);
+            }
+        }   
+        
     }
     
     @Override
@@ -89,20 +101,13 @@ public class Logic extends Thread implements ConstantesCB{
                 System.out.println("y : " + bola.getY());
                 Thread.sleep(50);
                 
-                try {
-                    /** for(int i = 0 ; i < listaj.size() ; i++) {
-                     * getBarra(i).moverse();
-                     * }*/
-                    
-                    sleep(1);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+                for(int i = 0 ; i < listaj.size() ; i++) {
+                    getBarra(i).moverse();
                 }
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }
     
@@ -114,7 +119,12 @@ public class Logic extends Thread implements ConstantesCB{
     public void verificarColision(){
            
         if(bola.getRect().getMaxY() >  ALTO_PANTALLA){
-            terminarJuego();
+            turnos -= 1 ;   
+            //terminarJuego();
+            if(turnos <= 0){
+                terminarJuego();
+            }
+            
         }        
         
         for(int i = 0, j = 0 ; i < CANTIDAD_BLOQUES ; i++){
@@ -136,33 +146,32 @@ public class Logic extends Thread implements ConstantesCB{
                 System.out.println("Colision barra");
                 int posBarra = (int) barra_aux.getRect().getMinX();
                 int posBola = (int) bola.getRect().getMinX();
-                
+
                 int int1 = posBarra + sub_parte;
                 int int2 = posBarra + 2 * sub_parte;
                 int int3 = posBarra + 3 * sub_parte;
                 int int4 = posBarra + barra_aux.getAncho();
-                
+
                 if(posBola < int1){
                     bola.setX_aux(-1);
                     bola.setY(-1);                    
                 }
-                
+
                 if(posBola >= int1 && posBola < int2){
                     bola.setY_aux(-1);
                 }
-                
+
                 if(posBola >= int2 && posBola < int3){
                     bola.setX_aux(0);
                     bola.setY_aux(-1);
                 }
-                
+
                 if(posBola >= int3 && posBola < int4){
                     bola.setX_aux(1);
                     bola.setY_aux(-1);
                 }
-                
+
             }
-            
         }
         
         for(int i = 0; i < CANTIDAD_BLOQUES; i++){
@@ -194,7 +203,6 @@ public class Logic extends Thread implements ConstantesCB{
         }
     }
     
-    
     /**
      * Hace un casting del elemento Object que devuelve 
      * la <code>ArrayList</code> 
@@ -211,13 +219,8 @@ public class Logic extends Thread implements ConstantesCB{
     public void terminarJuego(){
         en_juego = false;
         System.out.println("Game Over");
-        
     }
     
-    public Bola getBola() {
-        return bola;
-    }
-        
 }
 
 
